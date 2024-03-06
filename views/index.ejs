@@ -2,8 +2,6 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
-
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
@@ -18,7 +16,24 @@
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
+  <%- include('./partials/header') %>
+
+  <main>
+    <h1>Secure and Reliable Password Manager</h1>
+    <p>that keeps your information only click away</p>
+
+    <div class="features">
+      <div>Describe feature #1</div>
+      <div>Describe feature #2</div>
+      <div>Describe feature #3</div>
+      <div>Describe feature #4</div>
+      <div>Describe feature #5</div>
+      <div>Describe feature #6</div>
+    </div>
+  </main>
+
+  <%- include('./partials/footer')%>
+
 </body>
 
 </html>
