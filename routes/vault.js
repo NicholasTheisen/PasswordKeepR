@@ -28,3 +28,5 @@ router.get('/', async (req, res) => {
     res.status(500).send('Error fetching vault information');
   }
 });
+
+module.exports = router;
