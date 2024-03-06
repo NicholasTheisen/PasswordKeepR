@@ -1,10 +1,8 @@
 const express = require('express');
 const router  = express.Router();
 
-app.set ('view engine', 'ejs');
 
-
-const db = require('your-database-library'); // Import your database library
+//const db = require('midterm'); // Import  database library
 
 // Display the edit form for a specific website
 router.get('/:websiteId', async (req, res) => {

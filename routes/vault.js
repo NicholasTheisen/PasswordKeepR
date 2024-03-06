@@ -1,9 +1,8 @@
 const express = require('express');
 const router  = express.Router();
 
-app.set ('view engine', 'ejs');
 
-const db = require('your-database-library'); // Import the database
+//const db = require('midterm'); // Import the database
 router.get('/', async (req, res) => {
   try {
     // Hardcoded user and organization
