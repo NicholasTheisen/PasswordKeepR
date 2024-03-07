@@ -1,7 +1,7 @@
 const editURL = function(url, websiteId) {
   return db.query(`
-  UPDATE passwords
-  SET stored_password = $1
+  UPDATE websites
+  SET url = $1
   WHERE website_id = $2
   `, [url, websiteId])
   .then((result) => {
