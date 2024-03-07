@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
+const { allWebsites } = require('../db/queries/allWebsites');
 
 const allWebsitesQuery = require('../db/queries/allWebsites');
 
