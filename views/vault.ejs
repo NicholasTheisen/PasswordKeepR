@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content=""width=device-width, initial-scale="1.0">
+  <title>Vault - PasswordKeepR</title>
+  <!-- <link rel="stylesheet" href="/styles/layout.scss"> -->
+</head>
+<body>
+  <%- include('./partials/header') %>
+
+  <main>
+    <section class="profile">
+      <img src="path/to/picture.png" alt="Profile Picture">
+      <div>
+        <label>Username:</label>
+        <span>User's Username</span>
+      </div>
+      <div>
+        <label>Organization:</label>
+        <span>User's Organization</span>
+      </div>
+      <input type="text" placeholder="Search Password">
+    </section>
+    <section class="passwordList">
+      <!-- Passwordlist -->
+      <!-- We should loop through password in a separate js file and show it here like we did on Tweeter project -->
+    </section>
+
+  </main>
+  <%- include('./partials/footer') %>
+</body>
+</html>
