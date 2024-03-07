@@ -8,6 +8,7 @@ const morgan = require('morgan');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
+const db = require('./db/connection');
 
 app.set('view engine', 'ejs');
 

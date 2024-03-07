@@ -1,8 +1,7 @@
 const express = require('express');
 const router  = express.Router();
+const db = require('../db/connection'); // Import the database
 
-
-//const db = require('midterm'); // Import the database
 router.get('/', async (req, res) => {
   try {
     // Hardcoded user and organization
