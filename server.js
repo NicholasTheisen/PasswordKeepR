@@ -27,11 +27,14 @@ app.use(
 );
 app.use(express.static('public'));
 
+
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const indexRoutes = require('./routes/index');
 const vaultRoutes = require('./routes/vault');
 const editRoutes = require('./routes/edit');
+const usersRoutes = require('./routes/users');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -39,6 +42,7 @@ const editRoutes = require('./routes/edit');
 app.use('/', indexRoutes);
 app.use('/vault', vaultRoutes);
 app.use('/edit', editRoutes);
+app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
