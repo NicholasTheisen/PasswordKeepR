@@ -1,7 +1,8 @@
 const express = require('express');
 const router  = express.Router();
 
-const db = require('../db/connection'); // Import  database library
+
+//const db = require('midterm'); // Import  database library
 
 // Display the edit form for a specific website
 router.get('/:websiteId', async (req, res) => {
