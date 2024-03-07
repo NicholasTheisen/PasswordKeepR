@@ -14,3 +14,5 @@ const getAllWebsites = function (organization_id) {
     console.log(err.message);
   });
 };
+
+module.exports = { getAllWebsites };

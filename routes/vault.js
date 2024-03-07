@@ -1,8 +1,9 @@
 const express = require('express');
 const router  = express.Router();
+const db = require('../db/connection');
 
+const allWebsitesQuery = require('../db/queries/allWebsites');
 
-//const db = require('midterm'); // Import the database
 router.get('/', async (req, res) => {
   try {
     // Hardcoded user and organization
@@ -30,4 +31,14 @@ router.get('/', async (req, res) => {
   }
 });
 
+async function retrieveAllWebsites() {
+  try {
+    // Call the allWebsites query to retrieve all websites from the database
+    const allWebsites = await allWebsitesQuery(); // Assuming allWebsitesQuery is an async function
+    res.render('vault', { allWebsites }); // Pass the retrieved websites to the vault.ejs template for rendering
+  } catch (error) {
+    console.error('Error retrieving all websites:', error);
+    res.status(500).json({ error: 'An error occurred while retrieving all websites' });
+  }
+};
 module.exports = router;
