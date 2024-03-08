@@ -1,0 +1,40 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: cadetblue;
+  color: white;
+  padding: 10px 20px;
+  height: 100px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+header nav {
+  margin: 0;
+}
+
+header nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+}
+
+header nav ul li {
+  margin-left: 10px;
+}
+
+header nav ul li button {
+  padding: 10px 15px;
+    background-color: white;
+    color: #4CAF50;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}

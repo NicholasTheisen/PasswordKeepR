@@ -1,0 +1,67 @@
+// See: https://sass-lang.com/
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e5e5e5;
+}
+
+
+.edit-account {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.website-logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.website-logo-container img {
+  max-width: 100px;
+  height: auto;
+}
+
+.info-container {
+  margin-bottom: 20px;
+}
+
+.info-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #d3d3d3;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.info-field label {
+  flex-basis: 20%;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.info-field input[type="email"],
+.info-field input[type="password"],
+.info-field input[type="url"] {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+
+.info-field button {
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.info-field button:hover {
+  background-color: #367C39;
+}

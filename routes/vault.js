@@ -1,8 +1,11 @@
 const express = require('express');
 const router  = express.Router();
+const db = require('../db/connection');
+const { allWebsites } = require('../db/queries/allWebsites');
+
+const allWebsitesQuery = require('../db/queries/allWebsites');
 
 
-const db = require('../db/connection'); // Import the database
 router.get('/', async (req, res) => {
   try {
     // Hardcoded user and organization
@@ -16,11 +19,13 @@ router.get('/', async (req, res) => {
       name: 'Oscorp'
     };
 
-    // Fetch the list of websites and associated passwords from the database
-    const websites = await db.query('SELECT * FROM websites WHERE userId = ?', [user.id]);
-    const passwords = await db.query('SELECT * FROM passwords WHERE userId = ?', [user.id]);
-
-    res.render('vault', { user, organization, websites, passwords });
+    try {
+      // Render the EJS file named 'vault' located in the 'views' directory
+      res.render('vault');
+    } catch (error) {
+      console.error('Error rendering vault page:', error);
+      res.status(500).json({ error: 'An error occurred while rendering vault page' });
+    }
   } catch (error) {
     // Handle any errors
     console.error(error);
@@ -28,4 +33,14 @@ router.get('/', async (req, res) => {
   }
 });
 
+async function retrieveAllWebsites() {
+  try {
+    // Call the allWebsites query to retrieve all websites from the database
+    const allWebsites = await allWebsitesQuery(); // Assuming allWebsitesQuery is an async function
+    res.render('vault', { allWebsites }); // Pass the retrieved websites to the vault.ejs template for rendering
+  } catch (error) {
+    console.error('Error retrieving all websites:', error);
+    res.status(500).json({ error: 'An error occurred while retrieving all websites' });
+  }
+};
 module.exports = router;
