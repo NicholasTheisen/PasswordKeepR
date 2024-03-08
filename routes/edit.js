@@ -3,6 +3,7 @@ const router  = express.Router();
 const { editURL } = require('../db/queries/editURL'); // Import the editURL query
 const { editPassword } = require('../db/queries/edPassword'); // Import the editPassword query
 const db = require('../db/connection'); // Import  database library
+const generatePassword = require('../helpers/generatePassword'); // Import the generatePassword helper function
 
 // Handle GET request for /edit route
 router.get('/', async (req, res) => {
@@ -44,6 +45,9 @@ router.post('/password', async (req, res) => {
     // Get the password data from the request
     const password = req.body.password;
     const websiteId = req.body.websiteId;
+
+    // Call the generatePassword helper function
+    const generatePassword = generatePassword(websiteData);
 
     // Call the editPassword helper function
     const result = await editPassword(password, websiteId);
