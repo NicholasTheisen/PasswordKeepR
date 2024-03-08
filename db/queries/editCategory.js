@@ -1,9 +1,9 @@
-const editURL = function(url, websiteId) {
+const editCategory = function(category, websiteId) {
   return db.query(`
   UPDATE websites
-  SET url = $1
+  SET category_id = $1
   WHERE websites.id = $2
-  `, [url, websiteId])
+  `, [category, websiteId])
   .then((result) => {
     return result.rows;
   })
@@ -14,4 +14,4 @@ const editURL = function(url, websiteId) {
 
 
 
-module.exports = { editURL };
+module.exports = editCategory;
