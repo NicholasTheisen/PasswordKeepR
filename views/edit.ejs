@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/footer.css">
 
+
+  <script src="/routes/edit.js"></script>
+
 </head>
 
 <body>
@@ -19,35 +22,38 @@
     <main>
       <section class="edit-account">
         <div class="website-logo-container">
-          <img src="path/to/logopicture/.png" alt="Website Logo">
+          <img src="<%= websiteData.logo %>" alt="Website Logo">
         </div>
 
-        <div class="info-container">
-          <form id="edit-form" action="/edit" method="POST">
-            <div class="info-field">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="Enter new email here" value="<% currentEmail %>"
-                required>
-              <button type="submit">Submit</button>
-            </div>
+        <!-- Form for editing URL -->
+        <form action="/edit/url" method="POST">
+          <div class="info-field">
+            <label for="url">URL</label>
+            <input type="url" id="url" name="url" placeholder="Enter new URL here" value="<%= websiteData.url %>" required>
+          </div>
+          <input type="hidden" name="websiteId" value="<%= websiteData.id %>">
+          <button type="submit">Update URL</button>
+        </form>
 
-            <div class="info-field">
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" placeholder="Enter new password here"
-                value="<% currentPassword %>" required>
-              <button type="submit">Submit</button>
-            </div>
+        <!-- Form for editing Username -->
+        <form action="/edit/username" method="POST">
+          <div class="info-field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter new username here" value="<%= websiteData.username %>" required>
+          </div>
+          <input type="hidden" name="websiteId" value="<%= websiteData.id %>">
+          <button type="submit">Update Username</button>
+        </form>
 
-            <div class="info-field">
-              <label for="url">URL</label>
-              <input type="url" id="url" name="url" placeholder="Enter new URL here" value="<% currentUrl %>" required>
-              <button type="submit">Submit</button>
-            </div>
-
-
-          </form>
-        </div>
-
+        <!-- Form for editing Password -->
+        <form action="/edit/password" method="POST">
+          <div class="info-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter new password here" required>
+          </div>
+          <input type="hidden" name="websiteId" value="<%= websiteData.id %>">
+          <button type="submit">Update Password</button>
+        </form>
 
       </section>
     </main>

@@ -1,46 +1,58 @@
 const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
-const { allWebsites } = require('../db/queries/allWebsites');
+
 
 const allWebsitesQuery = require('../db/queries/allWebsites');
 
-
 router.get('/', async (req, res) => {
-  try {
-    // Hardcoded user and organization
-    const user = {
-      id: 1,
-      name: 'Norman Osborne',
-      organizationId: 1 // Assuming the organization ID for the hardcoded user
-    };
-    const organization = {
-      id: 1,
-      name: 'Oscorp'
-    };
 
+  try {
+    // Find the user who has username 'MikeLowry89'
+    const username = 'MikeLowry89';
+
+    const userQuery = 'SELECT * FROM users WHERE user_name = $1';
     try {
-      // Render the EJS file named 'vault' located in the 'views' directory
-      res.render('vault');
-    } catch (error) {
-      console.error('Error rendering vault page:', error);
-      res.status(500).json({ error: 'An error occurred while rendering vault page' });
+      const userResult = await db.query(userQuery, [username]);
+      const user = userResult.rows[0];
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+
+      // Find the organization with the user's organization_id
+      const organizationQuery = 'SELECT * FROM organizations WHERE id = $1';
+      const organizationResult = await db.query(organizationQuery, [user.organization_id]);
+      const organization = organizationResult.rows[0];
+      if (!organization) {
+        return res.status(404).send('Organization not found');
+      }
+
+      const result = await db.query('SELECT id, url, name, username, logo, organization_id, category_id FROM websites');
+      const websites = result.rows;
+
+
+
+
+      res.render('vault', { user, organization, websites });
+    } catch (err) {
+      console.error('Error:', err);
+      res.status(500).send('Error processing request');
     }
   } catch (error) {
-    // Handle any errors
-    console.error(error);
-    res.status(500).send('Error fetching vault information');
+    console.error('General Error:', error);
+    res.status(500).send('Error fetching data');
   }
 });
 
-async function retrieveAllWebsites() {
+async function retrieveAllWebsites(organization_id) {
   try {
     // Call the allWebsites query to retrieve all websites from the database
-    const allWebsites = await allWebsitesQuery(); // Assuming allWebsitesQuery is an async function
-    res.render('vault', { allWebsites }); // Pass the retrieved websites to the vault.ejs template for rendering
+    const allWebsites = await allWebsitesQuery.getAllWebsites(organization_id); // Assuming allWebsitesQuery is an async function
+    return allWebsites; // Return the retrieved websites
   } catch (error) {
     console.error('Error retrieving all websites:', error);
-    res.status(500).json({ error: 'An error occurred while retrieving all websites' });
+    throw new Error('Failed to retrieve websites');
   }
-};
+}
+
 module.exports = router;

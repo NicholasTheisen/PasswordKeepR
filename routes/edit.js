@@ -2,62 +2,79 @@ const express = require('express');
 const router  = express.Router();
 const { editURL } = require('../db/queries/editURL'); // Import the editURL query
 const { editPassword } = require('../db/queries/edPassword'); // Import the editPassword query
+const { editUsername } = require('../db/queries/editUsername'); // Import the editUsername query
 const db = require('../db/connection'); // Import  database library
 const generatePassword = require('../helpers/generatePassword'); // Import the generatePassword helper function
 
+
+// Function to get website data by ID
+const getWebsiteById = async (websiteId) => {
+  try {
+    const result = await db.query('SELECT * FROM websites WHERE id = $1', [websiteId]);
+    return result.rows[0]; // Assuming 'id' is unique and returns only one row
+  } catch (err) {
+    console.error('Error fetching website data:', err);
+    throw err;
+  }
+};
+
 // Handle GET request for /edit route
-router.get('/', async (req, res) => {
+router.get('/edit', async (req, res) => {
+  console.log('Edit route accessed');
   try {
-    const currentEmail = "example@example.com";
-    const currentPassword = "examplePassword";
-    const currentUrl = "https://example.com";
-    // Render the EJS file named 'edit' located in the 'views' directory, passing the currentEmail, currentPassword, and currentUrl variables
-    res.render('edit', { currentEmail, currentPassword, currentUrl });
+
+    const websiteId = parseInt(req.query.websiteId, 10);
+    console.log("Received websiteId:", websiteId);
+    if (isNaN(websiteId)) {
+      return res.status(400).send('Invalid website ID');
+    }
+
+    const websiteData = await getWebsiteById(websiteId);
+    if (!websiteData) {
+      return res.status(404).send('Website not found');
+    }
+
+    res.render('edit', { websiteData });
   } catch (error) {
-    console.error('Error rendering edit page:', error);
-    res.status(500).json({ error: 'An error occurred while rendering edit page' });
+    console.error('Error occurred while rendering edit page:', error);
+    res.status(500).send('Error occurred while rendering edit page');
   }
 });
 
-
-// Handle POST request for /edit/url route
-router.post('/url', async (req, res) => {
+router.post('/edit/url', async (req, res) => {
   try {
-    // Get the URL data from the request
-    const url = req.body.url;
-    const websiteId = req.body.websiteId;
-
-    // Call the editURL helper function
-    const result = await editURL(url, websiteId);
-
-    // Handle the result and send the response
-    res.json({ message: 'URL edited successfully' });
+      const { url, websiteId } = req.body;
+      await editURL(url, websiteId);
+      res.redirect('/vault');
   } catch (error) {
-    // Handle any errors that occur during the URL editing process
-    console.error('Error editing URL:', error);
-    res.status(500).json({ error: 'An error occurred while editing the URL' });
+      console.error('Error updating URL:', error);
+      res.status(500).send('Error occurred while updating the URL');
   }
 });
 
-// Handle POST request for /edit/password route
-router.post('/password', async (req, res) => {
+// Handle POST request for editing the username
+router.post('/edit/username', async (req, res) => {
+  console.log('*****',req.body);
   try {
-    // Get the password data from the request
-    const password = req.body.password;
-    const websiteId = req.body.websiteId;
 
-    // Call the generatePassword helper function
-    const generatePassword = generatePassword(websiteData);
-
-    // Call the editPassword helper function
-    const result = await editPassword(password, websiteId);
-
-    // Handle the result and send the response
-    res.json({ message: 'Password edited successfully' });
+      const { username } = req.body;
+      await editUsername(username, websiteId);
+      res.redirect('/vault');
   } catch (error) {
-    // Handle any errors that occur during the password editing process
-    console.error('Error editing password:', error);
-    res.status(500).json({ error: 'An error occurred while editing the password' });
+      console.error('Error updating username:', error);
+      res.status(500).send('Error occurred while updating the username');
+  }
+});
+
+// Handle POST request for editing the password
+router.post('/edit/password', async (req, res) => {
+  try {
+      const { password, websiteId } = req.body;
+      await editPassword(password, websiteId);
+      res.redirect('/vault');
+  } catch (error) {
+      console.error('Error updating password:', error);
+      res.status(500).send('Error occurred while updating the password');
   }
 });
 
