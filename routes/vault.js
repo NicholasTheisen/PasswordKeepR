@@ -5,6 +5,7 @@ const { allWebsites } = require('../db/queries/allWebsites');
 
 const allWebsitesQuery = require('../db/queries/allWebsites');
 
+
 router.get('/', async (req, res) => {
   try {
     // Hardcoded user and organization

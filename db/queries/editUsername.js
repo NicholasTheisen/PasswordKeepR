@@ -1,9 +1,9 @@
-const editURL = function(url, websiteId) {
+const editUsername = function(username, websiteId) {
   return db.query(`
   UPDATE websites
-  SET url = $1
+  SET username = $1
   WHERE websites.id = $2
-  `, [url, websiteId])
+  `, [username, websiteId])
   .then((result) => {
     return result.rows;
   })
@@ -14,4 +14,4 @@ const editURL = function(url, websiteId) {
 
 
 
-module.exports = { editURL };
+module.exports = editUsername;

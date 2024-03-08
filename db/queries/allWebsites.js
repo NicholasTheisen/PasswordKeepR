@@ -1,6 +1,6 @@
 const getAllWebsites = function (organization_id) {
   return db.query(`
-  SELECT url, logo, stored_password as password, category_name as category
+  SELECT url, name, username, logo, stored_password as password, category_name as category
   FROM websites
   JOIN passwords ON websites.id = website_id
   JOIN categories ON categories.id = category_id
@@ -14,5 +14,6 @@ const getAllWebsites = function (organization_id) {
     console.log(err.message);
   });
 };
+
 
 module.exports = { getAllWebsites };
