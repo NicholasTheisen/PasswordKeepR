@@ -11,26 +11,43 @@
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/footer.css">
 
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script src="/routes/vault.js"></script>
+  <script src="/helpers/copyToClipboard.js"></script>
+
 </head>
 <body>
   <%- include('./partials/header') %>
 
   <main>
     <section class="profile">
-      <img src="path/to/picture.png" alt="Profile Picture">
+      <img src="<%= user.profile_photo %>" alt="Profile Picture">
       <div>
         <label>Username:</label>
-        <span>User's Username</span>
+        <span><%= user.user_name %></span>
       </div>
       <div>
         <label>Organization:</label>
-        <span>User's Organization</span>
+        <span><%= organization.name %></span>
       </div>
       <input type="text" placeholder="Search Password">
     </section>
     <section class="passwordList">
-      <!-- Passwordlist -->
-      <!-- We should loop through password in a separate js file and show it here like we did on Tweeter project -->
+      <% if (websites && websites.length > 0) { %>
+        <% websites.forEach(website => { %>
+          <div class="website-item">
+            <p><strong>Name:</strong> <%= website.name %></p>
+            <p><strong>URL:</strong> <a href="<%= website.url %>" target="_blank"><%= website.url %></a></p>
+
+            <a href="/edit?websiteId=<%= website.id %>">Edit</a>
+            <button onclick="copyPasswordToClipboard('<%= website.url %>')">Copy Password</button>
+      </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No websites found.</p>
+      <% } %>
     </section>
 
   </main>

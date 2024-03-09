@@ -9,6 +9,18 @@ const morgan = require('morgan');
 const PORT = process.env.PORT || 8080;
 const app = express();
 const db = require('./db/connection');
+const path = require('path');
+const vaultRouter = require('./routes/vault');
+const editRouter = require('./routes/edit');
+
+
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
+
+// Serve static files from 'helpers' and 'routes' directories
+app.use('/helpers', express.static(path.join(__dirname, 'helpers')));
+app.use('/routes', express.static(path.join(__dirname, 'routes')));
+app.use('/', editRouter);
 
 app.set('view engine', 'ejs');
 
