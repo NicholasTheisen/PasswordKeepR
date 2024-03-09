@@ -1,4 +1,4 @@
-function generatePassword(website) {
+function generatePassword() {
   const capitalLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
   const numbers = '0123456789';
@@ -21,6 +21,9 @@ function generatePassword(website) {
   password = password.split('').sort(() => Math.random() - 0.5).join('');
 
   return password;
+
+
+
 }
 
 module.exports = generatePassword;

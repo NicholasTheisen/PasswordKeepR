@@ -12,6 +12,7 @@ const db = require('./db/connection');
 const path = require('path');
 const vaultRouter = require('./routes/vault');
 const editRouter = require('./routes/edit');
+const newWebsiteRouter = require('./routes/newWebsite');
 
 
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/helpers', express.static(path.join(__dirname, 'helpers')));
 app.use('/routes', express.static(path.join(__dirname, 'routes')));
 app.use('/', editRouter);
+app.use('/newWebsite', newWebsiteRouter);
 
 app.set('view engine', 'ejs');
 
