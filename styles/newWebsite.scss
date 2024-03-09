@@ -1,0 +1,53 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+#newWebsiteForm {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+#newWebsiteForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#newWebsiteForm input[type="text"],
+#newWebsiteForm select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#newWebsiteForm button {
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#newWebsiteForm button:hover {
+  background-color: #003d82;
+}
+
+#generatePassword {
+  background-color: #4CAF50;
+  margin-left: 10px;
+}
+
+#generatePassword:hover {
+  background-color: #367c39;
+}

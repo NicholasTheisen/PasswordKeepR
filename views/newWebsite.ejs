@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="" width=device-width, initial-scale="1.0">
+  <title>Vault - PasswordKeepR</title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/newWebsite.css" />
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/footer.css">
+
+  <title>New Website</title>
+  <!-- Add any additional head elements here -->
+</head>
+
+<body>
+
+  <%- include('./partials/header') %>
+
+  <form id="newWebsiteForm" action="/newWebsite" method="POST">
+    <label for="url">URL:</label>
+    <input type="text" id="url" name="url"><br>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username"><br>
+
+    <label for="password">Password:</label>
+    <input type="text" id="password" name="password">
+    <button type="button" id="generatePassword">Generate Password</button><br>
+
+    <label for="category">Category:</label>
+    <select id="category" name="category">
+      <option value="social">Social</option>
+      <option value="work">Work</option>
+      <option value="entertainment">Entertainment</option>
+      <option value="food">Food</option>
+    </select><br>
+
+    <button type="submit">Add a Website</button>
+  </form>
+
+  <script>
+    document.getElementById('generatePassword').addEventListener('click', function () {
+      var password = Array(12).fill("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz").map(function (x) {
+        return x[Math.floor(Math.random() * x.length)];
+      }).join('');
+      document.getElementById('password').value = password;
+    });
+
+
+  </script>
+
+<%- include('./partials/footer') %>
+</body>
+
+</html>
