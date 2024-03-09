@@ -20,11 +20,11 @@ const getWebsiteById = async (websiteId) => {
 
 // Handle GET request for /edit route
 router.get('/edit', async (req, res) => {
-  console.log('Edit route accessed');
+
   try {
 
     const websiteId = parseInt(req.query.websiteId, 10);
-    console.log("Received websiteId:", websiteId);
+
     if (isNaN(websiteId)) {
       return res.status(400).send('Invalid website ID');
     }
@@ -43,7 +43,8 @@ router.get('/edit', async (req, res) => {
 
 router.post('/edit/url', async (req, res) => {
   try {
-      const { url, websiteId } = req.body;
+      const url = 'www.facebook.ca'; // hardcoded
+      const websiteId = 1;
       await editURL(url, websiteId);
       res.redirect('/vault');
   } catch (error) {
@@ -54,10 +55,10 @@ router.post('/edit/url', async (req, res) => {
 
 // Handle POST request for editing the username
 router.post('/edit/username', async (req, res) => {
-  console.log('*****',req.body);
-  try {
 
-      const { username } = req.body;
+  try {
+      const websiteId = 1;    // hardcoded
+      const username = 'Spidey12345';
       await editUsername(username, websiteId);
       res.redirect('/vault');
   } catch (error) {
@@ -69,7 +70,9 @@ router.post('/edit/username', async (req, res) => {
 // Handle POST request for editing the password
 router.post('/edit/password', async (req, res) => {
   try {
-      const { password, websiteId } = req.body;
+
+      const password = '1234' // hardcoded
+      const websiteId = 1;
       await editPassword(password, websiteId);
       res.redirect('/vault');
   } catch (error) {
