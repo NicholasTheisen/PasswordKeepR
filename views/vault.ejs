@@ -18,7 +18,16 @@
 
 </head>
 <body>
-  <%- include('./partials/header') %>
+  <header>
+    <h1>PasswordKeepR</h1>
+    <nav>
+      <ul>
+        <li><button onclick="location.href='/'">Home</button></li>
+        <li><button onclick="location.href='/vault'">Vault</button></li>
+        <li><button onclick="location.href='/vault'">Logout</button></li> <!-- hardcoded to redirect to vault -->
+      </ul>
+    </nav>
+  </header>
 
   <main>
     <section class="profile">
@@ -32,6 +41,7 @@
         <span><%= organization.name %></span>
       </div>
       <input type="text" placeholder="Search Password">
+      <a href="/newWebsite">Add a new website</a>
     </section>
     <section class="passwordList">
       <% if (websites && websites.length > 0) { %>
@@ -50,9 +60,9 @@
 
             <a href="/edit?websiteId=<%= website.id %>">Edit</a>
             <!-- <button onclick="copyPasswordToClipboard('<%= website.id.stored_password %>')">Copy Password</button> -->
-            <input type="button"  class="btn btn-primary" onclick="copyLink()" data-toggle="tooltip" title="Copy to Clipboard" value="copy link" readonly />
+            <input type="button"  class="btn btn-primary" onclick="copyLink()" data-toggle="tooltip" title="Copy to Clipboard" value="copy password" readonly />
 
-            <span id="copyText">Winter2024</span>
+            <span  id="copyText">Winter2024</span>
 
           </div>
         <% }) %>

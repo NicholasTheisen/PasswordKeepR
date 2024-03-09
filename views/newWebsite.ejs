@@ -18,9 +18,16 @@
 </head>
 
 <body>
-
-  <%- include('./partials/header') %>
-
+ <header>
+  <h1>PasswordKeepR</h1>
+  <nav>
+    <ul>
+      <li><button onclick="location.href='/'">Home</button></li>
+      <li><button onclick="location.href='/vault'">Vault</button></li>
+      <li><button onclick="location.href='/vault'">Logout</button></li> <!-- hardcoded to redirect to vault -->
+    </ul>
+  </nav>
+</header>
   <form id="newWebsiteForm" action="/newWebsite" method="POST">
     <label for="url">URL:</label>
     <input type="text" id="url" name="url"><br>
