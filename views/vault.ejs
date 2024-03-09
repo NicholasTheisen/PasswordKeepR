@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content=""width=device-width, initial-scale="1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vault - PasswordKeepR</title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
@@ -14,7 +14,7 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script src="/routes/vault.js"></script>
-  <script src="/helpers/copyToClipboard.js"></script>
+
 
 </head>
 <body>
@@ -37,12 +37,20 @@
       <% if (websites && websites.length > 0) { %>
         <% websites.forEach(website => { %>
           <div class="website-item">
+            <script src="/helpers/copyToClipboard.js"></script>
             <p><strong>Name:</strong> <%= website.name %></p>
             <p><strong>URL:</strong> <a href="<%= website.url %>" target="_blank"><%= website.url %></a></p>
-
+            <p><strong>Password:</strong>
+            <% passwords.forEach(password => {
+              if (password.website_id === website.id) { %>
+                <%= password.stored_password %>
+            <% } }); %></p>
             <a href="/edit?websiteId=<%= website.id %>">Edit</a>
-            <button onclick="copyPasswordToClipboard('<%= website.url %>')">Copy Password</button>
-      </div>
+            <!-- <button onclick="copyPasswordToClipboard('<%= website.id.stored_password %>')">Copy Password</button> -->
+            <input type="button"  class="btn btn-primary" onclick="copyLink()" data-toggle="tooltip" title="Copy to Clipboard" value="copy link" readonly />
+
+            <span id="copyText">Winter2024</span>
+
           </div>
         <% }) %>
       <% } else { %>
