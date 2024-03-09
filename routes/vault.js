@@ -34,8 +34,6 @@ router.get('/', async (req, res) => {
       const passwordQuery = 'SELECT * FROM passwords'; // Define the password query
       const passwordResult = await db.query(passwordQuery); // Execute the query
       const passwords = passwordResult.rows;
-      console.log('passwords returned:', passwords);
-
 
 
       res.render('vault', { user, organization, websites, passwords});
