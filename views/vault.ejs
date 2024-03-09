@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content=""width=device-width, initial-scale="1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vault - PasswordKeepR</title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
@@ -39,10 +39,13 @@
           <div class="website-item">
             <p><strong>Name:</strong> <%= website.name %></p>
             <p><strong>URL:</strong> <a href="<%= website.url %>" target="_blank"><%= website.url %></a></p>
-
+            <p><strong>Password:</strong>
+            <% passwords.forEach(password => {
+              if (password.website_id === website.id) { %>
+                <%= password.stored_password %>
+            <% } }); %></p>
             <a href="/edit?websiteId=<%= website.id %>">Edit</a>
-            <button onclick="copyPasswordToClipboard('<%= website.url %>')">Copy Password</button>
-      </div>
+            <button onclick="copyPasswordToClipboard('<%= website.password %>')">Copy Password</button>
           </div>
         <% }) %>
       <% } else { %>

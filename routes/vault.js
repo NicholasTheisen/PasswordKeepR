@@ -31,9 +31,14 @@ router.get('/', async (req, res) => {
       const websites = result.rows;
 
 
+      const passwordQuery = 'SELECT * FROM passwords'; // Define the password query
+      const passwordResult = await db.query(passwordQuery); // Execute the query
+      const passwords = passwordResult.rows;
+      console.log('passwords returned:', passwords);
 
 
-      res.render('vault', { user, organization, websites });
+
+      res.render('vault', { user, organization, websites, passwords});
     } catch (err) {
       console.error('Error:', err);
       res.status(500).send('Error processing request');
@@ -54,5 +59,7 @@ async function retrieveAllWebsites(organization_id) {
     throw new Error('Failed to retrieve websites');
   }
 }
+
+
 
 module.exports = router;
