@@ -40,11 +40,14 @@
             <script src="/helpers/copyToClipboard.js"></script>
             <p><strong>Name:</strong> <%= website.name %></p>
             <p><strong>URL:</strong> <a href="<%= website.url %>" target="_blank"><%= website.url %></a></p>
+
             <p><strong>Password:</strong>
             <% passwords.forEach(password => {
               if (password.website_id === website.id) { %>
                 <%= password.stored_password %>
             <% } }); %></p>
+             <p><strong>Category:</strong> <%= website.category_name %></p>
+
             <a href="/edit?websiteId=<%= website.id %>">Edit</a>
             <!-- <button onclick="copyPasswordToClipboard('<%= website.id.stored_password %>')">Copy Password</button> -->
             <input type="button"  class="btn btn-primary" onclick="copyLink()" data-toggle="tooltip" title="Copy to Clipboard" value="copy link" readonly />

@@ -29,7 +29,8 @@
         <form action="/edit/url" method="POST">
           <div class="info-field">
             <label for="url">URL</label>
-            <input type="url" id="url" name="url" placeholder="Enter new URL here" value="<%= websiteData.url %>" required>
+            <input type="url" id="url" name="url" placeholder="Enter new URL here" value="<%= websiteData.url %>"
+              required>
           </div>
           <input type="hidden" name="websiteId" value="<%= websiteData.id %>">
           <button type="submit">Update URL</button>
@@ -39,7 +40,8 @@
         <form action="/edit/username" method="POST">
           <div class="info-field">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter new username here" value="<%= websiteData.username %>" required>
+            <input type="text" id="username" name="username" placeholder="Enter new username here"
+              value="<%= websiteData.username %>" required>
           </div>
           <input type="hidden" name="websiteId" value="<%= websiteData.id %>">
           <button type="submit">Update Username</button>
@@ -53,6 +55,32 @@
           </div>
           <input type="hidden" name="websiteId" value="<%= websiteData.id %>">
           <button type="submit">Update Password</button>
+        </form>
+
+        <!-- Form for editing Category -->
+        <form action="/edit/category" method="POST">
+          <div class="info-field">
+            <fieldset>
+              <legend>Please select a category:</legend>
+              <div>
+                <input type="radio" id="socialCategory" name="category" value="social" />
+                <label for="socialCategory">Social</label>
+
+                <input type="radio" id="workCategory" name="category" value="work" />
+                <label for="workCategory">Work</label>
+
+                <input type="radio" id="entertainmentCategory" name="category" value="entertainment" />
+                <label for="entertainmentCategory">Entertainment</label>
+
+                <input type="radio" id="foodCategory" name="category" value="food" />
+                <label for="foodCategory">Food</label>
+              </div>
+            </fieldset>
+<!--             <label for="category">Category</label>
+            <input type="password" id="password" name="password" placeholder="Enter new password here" required> -->
+          </div>
+          <input type="hidden" name="websiteId" value="<%= websiteData.id %>">
+          <button type="submit">Update Category</button>
         </form>
 
       </section>
