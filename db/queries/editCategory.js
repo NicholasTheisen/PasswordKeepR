@@ -1,3 +1,5 @@
+const db = require('../connection');
+
 const editCategory = function(category, websiteId) {
   return db.query(`
   UPDATE websites

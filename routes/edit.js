@@ -5,12 +5,14 @@ const { editPassword } = require('../db/queries/edPassword'); // Import the edit
 const { editUsername } = require('../db/queries/editUsername'); // Import the editUsername query
 const db = require('../db/connection'); // Import  database library
 const generatePassword = require('../helpers/generatePassword'); // Import the generatePassword helper function
+const editCategory = require('../db/queries/editCategory');
 
 
 // Function to get website data by ID
 const getWebsiteById = async (websiteId) => {
   try {
     const result = await db.query('SELECT * FROM websites WHERE id = $1', [websiteId]);
+    console.log(result.rows);
     return result.rows[0]; // Assuming 'id' is unique and returns only one row
   } catch (err) {
     console.error('Error fetching website data:', err);
@@ -18,12 +20,19 @@ const getWebsiteById = async (websiteId) => {
   }
 };
 
+
 // Handle GET request for /edit route
 router.get('/edit', async (req, res) => {
-
   try {
 
     const websiteId = parseInt(req.query.websiteId, 10);
+/*     const category =  await db.query(`
+    SELECT category_name
+    FROM categories
+    JOIN websites ON categories.id = category_id
+    WHERE websites.id = $1`, [websiteId])
+
+    console.log(Object.values(category.rows[0])); */
 
     if (isNaN(websiteId)) {
       return res.status(400).send('Invalid website ID');
@@ -78,6 +87,19 @@ router.post('/edit/password', async (req, res) => {
   } catch (error) {
       console.error('Error updating password:', error);
       res.status(500).send('Error occurred while updating the password');
+  }
+});
+
+router.post('/edit/category', async (req, res) => {
+  try {
+
+      const category = req.query.category
+      const websiteId = parseInt(req.query.websiteId, 10);
+      await editCategory(category, websiteId);
+      res.redirect('/vault');
+  } catch (error) {
+      console.error('Error updating category:', error);
+      res.status(500).send('Error occurred while updating the category');
   }
 });
 

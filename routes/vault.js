@@ -27,7 +27,11 @@ router.get('/', async (req, res) => {
         return res.status(404).send('Organization not found');
       }
 
-      const result = await db.query('SELECT id, url, name, username, logo, organization_id, category_id FROM websites');
+      const result = await db.query(`
+      SELECT websites.id, url, name, username, logo, organization_id, category_id, category_name
+      FROM websites
+      JOIN categories ON categories.id = category_id
+      `);
       const websites = result.rows;
 
 

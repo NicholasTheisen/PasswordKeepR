@@ -39,6 +39,7 @@
           <div class="website-item">
             <p><strong>Name:</strong> <%= website.name %></p>
             <p><strong>URL:</strong> <a href="<%= website.url %>" target="_blank"><%= website.url %></a></p>
+            <p><strong>Category:</strong> <%= website.category_name %></p>
 
             <a href="/edit?websiteId=<%= website.id %>">Edit</a>
             <button onclick="copyPasswordToClipboard('<%= website.url %>')">Copy Password</button>
